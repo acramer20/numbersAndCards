@@ -36,3 +36,36 @@ Promise.all(finalArr)
     })
     .catch(err => console.log("Rejected", err));
 
+
+// Async and Await Keywords
+
+// 1. 
+async function numFact(){
+    let res = await axios.get(`${baseURL}/${favNumber}?json`)
+    console.log(res.data.text)
+}
+numFact()
+
+// 2. 
+async function favNumbers(){
+    let res = await axios.get(`${baseURL}/${favNums}?json`)
+    for (let i = 0; i < favNums.length; i++){
+        console.log(res.data[favNums[i]])
+    }
+}
+favNumbers()
+
+// 3. 
+async function fourFacts(){
+    let res = await Promise.all([
+        axios.get(`${baseURL}/6?json`),
+        axios.get(`${baseURL}/6?json`),
+        axios.get(`${baseURL}/6?json`),
+        axios.get(`${baseURL}/6?json`)
+    ])
+    for (let i = 0; i < res.length; i++){
+        $("body").append(`<p>${res[i].data.text}</p>`)
+    }
+}
+fourFacts()
+
